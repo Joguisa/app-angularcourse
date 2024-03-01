@@ -1,0 +1,58 @@
+<div class="w-full h-full">
+  <div class="d-flex flex-row-reverse h-full">
+
+    <!-- FORM -->
+    <div class="col-12 col-lg-5 p-1 p-md-4">
+      <div class="d-flex flex-column justify-content-center align-items-center p-3 p-md-4 h-full">
+        <div class="d-block d-lg-none mx-auto mb-3">
+          <img src="./assets/angular_solidBlack.png" class="img-fluid" alt="ANGULAR">
+        </div>
+        <span class="text-center fs-20 fw-500 lh-16 text-formsPrimary">LOGIN</span>
+        <form class="w-full " autocomplete="off" [formGroup]="loginForm">
+
+          <!-- EMAIL -->
+          <div class="mt-3">
+            <label for="emailI" class="fw-500 my-1">Email</label>
+            <ng-container>
+              <input type="email" id="emailI" placeholder="Email"
+                class="form-control bg-inputPrimary" formControlName="email" >
+            </ng-container>
+          </div>
+
+          <!-- PASSWORD -->
+          <div class="mt-3">
+            <label for="passwordI" class="fw-500 my-1">Password</label>
+            <div class="input-group">
+              <input type="password" formControlName="password" placeholder="Password" 
+              id="passwordI" [maxLength]="20" class="form-control bg-inputPrimary">
+            </div>
+          </div>
+
+          <!-- BUTTON  -->
+          <div class="d-flex flex-row justify-content-center mb-2 mt-4 w-full">
+            <button type="submit" (click)="login()"  class="btn btn-formsPrimary m-1 w-full">
+              Log in
+            </button>
+          </div>
+
+          <!-- GO TO SIGN OUT  -->
+          <div class="text-center mb-1 d-flex justify-content-center w-full mt-3">
+            <span>Not have and account? <a class="cursor-pointer" (click)="redirectSignUp()"> Sign Up Here</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- DETAIL -->
+    <div class="col-12 col-lg-7 d-none d-lg-block bg-formsPrimary h-full">
+      <div class="d-flex flex-column justify-content-center align-items-center p-2 p-md-4 h-full">
+        <div class="mx-auto mb-3">
+          <img src="./assets/angular_whiteTransparent.png" class="img-fluid" alt="ANGULAR">
+        </div>
+
+        <span class="text-whites h5">BOOTCAMP FULL STACK</span>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+a {
+  color: #0c2639 !important;
+}
+
+.w-full {
+  width: 100% !important;
+}
+
+.h-full {
+  height: 100% !important;
+}
+
+.text-formsPrimary {
+  color: #060606 !important;
+}
+
+.text-whites {
+  color: #fff !important;
+}
+
+.fw-500 {
+  font-weight: 500 !important;
+}
+
+.fw-700 {
+  font-weight: 700 !important;
+}
+
+.fs-20 {
+  font-size: 20px !important;
+}
+
+.bg-formsPrimary {
+  background-color: #0c2639 !important;
+}
+
+.bg-inputPrimary {
+  background-color: #eff7ff !important;
+}
+
+.btn {
+  border-radius: 10px !important;
+  min-width: 105px !important;
+  height: 38px !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  line-height: 16px !important;
+  text-align: center !important;
+}
+
+.btn-formsPrimary {
+  background-color: #0c2639 !important;
+  color: #fff !important;
+}
+
+
+/* .color1 {color: #060606;}
+.color2 {color: #0c2639;}
+.color3 {color: #26497a;}
+.color4 {color: #537fc8;}
+.color5 {color: #7daad9;} */
+
+/* .color1 {color: #00081f;}
+.color2 {color: #002e54;}
+.color3 {color: #005994;}
+.color4 {color: #008edc;}
+.color5 {color: #00ccff;} */
