@@ -1,35 +1,34 @@
 <div class="container p-5">
-    <h2 class="text-center">List of products</h2>
-    <table class="table table-striped table-hover text-center">
-        <thead>
+    <h1 class="text-center">List of products</h1>
+    <table class="table table-striped table-responsive ">
+        <thead class="thead-light">
             <tr>
-                <th>Id</th>
+                <th>Code</th>
                 <th>Name</th>
-                <th>Descripcion</th>
+                <th>Description</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            @for (item of listProducts; track item.id) {
+        <tbody>
+            @for (item of listProducts; track item.code) {
             <tr>
-                <td> {{ item.id }} </td>
-                <td> {{ item.name}} </td>
-                <td> {{ item.description}} </td>
-                <td> {{ item.price}} </td>
-                <td class="text-center">
-                    <div class="d-flex justify-content-center">
-                        <div class="cantidad-container">
-                            <i class="fa-solid fa-minus icono-cantidad" (click)="decreaseQuantity(item)"></i>
-                            <span class="cantidad">{{item.quantity}}</span>
-                            <i class="fa-solid fa-plus icono-cantidad" (click)="increaseQuantity(item)"></i>
-                        </div>
+                <td> {{ item.code }} </td>
+                <td> {{ item.name }} </td>
+                <td> {{ item.description }} </td>
+                <td> {{ item.price | currency:'USD' }} </td>
+                <td>
+                    <div class="cantidad-container">
+                        <i class="fa-solid fa-minus icono-cantidad" (click)="decreaseQuantity(item)"></i>
+                        <span class="cantidad mx-1">{{ item.quantity }}</span>
+                        <i class="fa-solid fa-plus icono-cantidad" (click)="increaseQuantity(item)"></i>
                     </div>
                 </td>
 
-                <td>
-                    <i class="fa fa-shopping-cart text-center" (click)="addCart(item)" aria-hidden="true"></i>
+                <td >
+                    <i class="fa fa-shopping-cart text-center icon-colour cursor-pointer mx-1" (click)="addCart(item)"></i>
+                    <i class="fa fa-trash text-center icon-trash cursor-pointer" (click)="deleteProduct(item)"></i>
                 </td>
             </tr>
             }
@@ -40,26 +39,26 @@
 <hr>
 
 <div class="container mt-5">
-    <h2 class="text-center">Invoice</h2>
+    <h1 class="text-center">Invoice</h1>
     <hr>
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Precio Unitario</th>
-                        <th>Cantidad</th>
+                        <th>Product</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
                         <th>Total</th>
                     </tr>
                 </thead>
-                <tbody class="text-center">
+                <tbody>
                     @for (item of productCart; track item) {
                     <tr>
-                        <td>{{item.name}}</td>
-                        <td>{{item.unitPrice}}</td>
-                        <td>{{item.quantity}}</td>
-                        <td>{{item.total}}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.unitPrice | currency:'USD' }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.total | currency:'USD' }}</td>
                     </tr>
                     }
                 </tbody>
@@ -74,20 +73,20 @@
                     <tbody>
                         <tr>
                             <td>IVA (12%)</td>
-                            <td>{{iva}}</td>
+                            <td>{{ _shoppingcartservice.iva | currency:'USD' }}</td>
                         </tr>
                         <tr>
                             <td>Subtotal</td>
-                            <td>{{subtotal}}</td>
+                            <td>{{ _shoppingcartservice.subtotal | currency:'USD' }}</td>
                         </tr>
                         <tr>
                             <td>Total</td>
-                            <td>{{totalAmount}}</td>
+                            <td>{{ _shoppingcartservice.totalAmount | currency:'USD' }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
+
 </div>

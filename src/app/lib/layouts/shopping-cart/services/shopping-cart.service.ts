@@ -7,41 +7,45 @@ import { ProductsI, ShoppCartI } from '../interfaces/products.interface';
 export class ShoppingCartService {
   constructor() {}
 
-  total: number = 0;
+  subtotal: number = 0;
+  iva: number = 0;
+  totalAmount: number = 0;
+
   listProducts: ProductsI[] = [
     {
-      id: 1,
-      name: 'Producto 1',
-      description: 'Descripción del producto 1',
-      price: 10.99,
+      code: '001',
+      name: 'Smartphone',
+      description: 'High-end smartphone with advanced features',
+      price: 799.99,
       quantity: 1,
     },
     {
-      id: 2,
-      name: 'Producto 2',
-      description: 'Descripción del producto 2',
-      price: 19.99,
+      code: '002',
+      name: 'Laptop',
+      description: 'Thin and lightweight laptop with powerful performance',
+      price: 1299.99,
       quantity: 1,
     },
     {
-      id: 3,
-      name: 'Producto 3',
-      description: 'Descripción del producto 3',
-      price: 5.99,
+      code: '003',
+      name: 'Headphones',
+      description: 'Wireless headphones with noise-cancelling technology',
+      price: 249.99,
       quantity: 1,
     },
     {
-      id: 4,
-      name: 'Producto 4',
-      description: 'Descripción del producto 4',
-      price: 15.99,
+      code: '004',
+      name: 'Smartwatch',
+      description: 'Fitness tracker with heart rate monitoring and GPS',
+      price: 199.99,
       quantity: 1,
     },
     {
-      id: 5,
-      name: 'Producto 5',
-      description: 'Descripción del producto 5',
-      price: 7.99,
+      code: '005',
+      name: 'Bluetooth Speaker',
+      description:
+        'Portable speaker with 360-degree sound and waterproof design',
+      price: 99.99,
       quantity: 1,
     },
   ];
@@ -54,7 +58,22 @@ export class ShoppingCartService {
     this.listProducts.unshift(product);
   }
 
-  deleteProduct(index: number) {
-    this.listProducts.splice(index, 1);
+  deleteProduct(productCode: string) {
+    const index = this.listProducts.findIndex(
+      (item) => item.code === productCode
+    );
+    if (index !== -1) {
+      this.listProducts.splice(index, 1);
+    }
+  }
+
+  calcularTotales(productCart: ShoppCartI[]) {
+    this.subtotal = +productCart
+      .reduce((acc, curr) => acc + curr.total, 0)
+      .toFixed(2);
+
+    this.iva = +(this.subtotal * 0.12).toFixed(2);
+
+    this.totalAmount = +(this.subtotal + this.iva).toFixed(2);
   }
 }

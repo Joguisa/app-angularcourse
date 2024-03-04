@@ -4,20 +4,17 @@ import { ProductsI, ShoppCartI } from '../interfaces/products.interface';
 
 @Component({
   selector: 'app-data-table',
-  standalone: true,
-  imports: [],
+  // standalone: true,
+  // imports: [],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.css',
 })
 export class DataTableComponent implements OnInit {
-  subtotal: number = 0;
-  iva: number = 0;
-  totalAmount: number = 0;
-
+  
   listProducts: ProductsI[] = [];
   productCart: ShoppCartI[] = [];
 
-  constructor(private _shoppingcartservice: ShoppingCartService) {}
+  constructor(public _shoppingcartservice: ShoppingCartService) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -25,7 +22,6 @@ export class DataTableComponent implements OnInit {
 
   getProducts() {
     this.listProducts = this._shoppingcartservice.getProducto();
-    console.log(this.listProducts);
   }
 
   decreaseQuantity(product: ProductsI) {
@@ -37,14 +33,17 @@ export class DataTableComponent implements OnInit {
   }
 
   addCart(product: ProductsI) {
-    const index = this.productCart.findIndex((item) => item.id === product.id);
-    if (index !== -1) {
-      this.productCart[index].quantity += product.quantity;
-      this.productCart[index].total += product.price * product.quantity;
+    const existingProduct = this.productCart.find(
+      (item) =>
+        item.code.toLocaleLowerCase() === product.code.toLocaleLowerCase()
+    );
+    if (existingProduct) {
+      existingProduct.quantity += product.quantity;
+      existingProduct.total += product.price * product.quantity;
     } else {
       const total = product.price * product.quantity;
       this.productCart.push({
-        id: product.id,
+        code: product.code,
         name: product.name,
         unitPrice: product.price,
         quantity: product.quantity,
@@ -56,19 +55,11 @@ export class DataTableComponent implements OnInit {
   }
 
   calcularTotales() {
-    this.subtotal = +this.productCart
-      .reduce((acc, curr) => acc + curr.total, 0)
-      .toFixed(2);
-
-    this.iva = +(this.subtotal * 0.12).toFixed(2);
-
-    this.totalAmount = +(this.subtotal + this.iva).toFixed(2);
+    this._shoppingcartservice.calcularTotales(this.productCart);
   }
 
-  clearCart() {
-    this.productCart = [];
-    this.subtotal = 0;
-    this.iva = 0;
-    this.totalAmount = 0;
+  deleteProduct(product: ProductsI) {
+    this._shoppingcartservice.deleteProduct(product.code);
+    this.getProducts();
   }
 }
