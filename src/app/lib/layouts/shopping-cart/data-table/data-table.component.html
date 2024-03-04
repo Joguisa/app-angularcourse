@@ -1,0 +1,95 @@
+<div class="container p-5">
+    <table class="table table-striped table-hover text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Descripcion</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @for (item of listProducts; track item.id) {
+            <tr>
+                <td> {{ item.id }} </td>
+                <td> {{ item.name}} </td>
+                <td> {{ item.description}} </td>
+                <td> {{ item.price}} </td>
+                <td class="text-center">
+                    <div class="d-flex justify-content-center">
+                        <div class="cantidad-container">
+                            <i class="fa-solid fa-minus icono-cantidad" (click)="decreaseQuantity(item)"></i>
+                            <span class="cantidad">{{item.quantity}}</span>
+                            <i class="fa-solid fa-plus icono-cantidad" (click)="increaseQuantity(item)"></i>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <i class="fa fa-shopping-cart text-center" (click)="addCart(item)" aria-hidden="true"></i>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<div class="container mt-5">
+    <h2 class="text-center">Factura</h2>
+    <hr>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio Unitario</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @for (item of productCart; track item) {
+                    <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.unitPrice}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.total}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        
+    </div>
+
+    <div >
+        <table >
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr >
+                    <td>IVA (12%)</td>
+                    <td>{{iva}}</td>
+                </tr>
+                <tr>
+                    <td>Subtotal</td>
+                    <td >{{subtotal}}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td >{{totalAmount}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

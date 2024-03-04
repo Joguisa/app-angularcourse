@@ -53,11 +53,11 @@ export class SignInComponent implements OnInit {
    * Método para realizar el login
    */
   login(){
-    if (this.loginForm.invalid) {
-      console.log('Formulario inválido');
-      this.loginForm.markAllAsTouched();
-      return;
-    }
+    // if (this.loginForm.invalid) {
+    //   console.log('Formulario inválido');
+    //   this.loginForm.markAllAsTouched();
+    //   return;
+    // }
 
     let data : SignInInterfaceI = {
       email: this.loginForm.get('email')?.value,
@@ -66,11 +66,14 @@ export class SignInComponent implements OnInit {
 
     this.dataForm = data;
 
-    if (data.email === this.emailForm && data.password === this.passwordForm) {
-      this.response = "Datos correctos";
-    } else {
-      this.response = "Datos incorrectos";
-    }
+    this.router.navigate(['layouts/shopping-cart']);
+
+    // if (data.email === this.emailForm && data.password === this.passwordForm) {
+    //   this.response = "Datos correctos";
+    //   this.router.navigate(['layouts/shopping-cart']);
+    // } else {
+    //   this.response = "Datos incorrectos";
+    // }
 
     // llamar al servicio cuando se lo cree
 
