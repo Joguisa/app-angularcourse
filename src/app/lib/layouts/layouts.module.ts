@@ -11,8 +11,6 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     LayoutsRoutingModule,
     SharedModule,
-    
   ],
-  providers: [CurrencyPipe],
 })
 export class LayoutsModule { }

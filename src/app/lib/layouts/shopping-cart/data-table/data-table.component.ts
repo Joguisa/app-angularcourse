@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ProductsI, ShoppCartI } from '../interfaces/products.interface';
-import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-data-table',
   standalone: true,
   imports: [],
-  providers: [CurrencyPipe],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.css',
 })
@@ -58,11 +56,19 @@ export class DataTableComponent implements OnInit {
   }
 
   calcularTotales() {
-    this.subtotal = +(this.productCart.reduce((acc, curr) => acc + curr.total, 0).toFixed(2));
-  
+    this.subtotal = +this.productCart
+      .reduce((acc, curr) => acc + curr.total, 0)
+      .toFixed(2);
+
     this.iva = +(this.subtotal * 0.12).toFixed(2);
-  
+
     this.totalAmount = +(this.subtotal + this.iva).toFixed(2);
   }
-  
+
+  clearCart() {
+    this.productCart = [];
+    this.subtotal = 0;
+    this.iva = 0;
+    this.totalAmount = 0;
+  }
 }

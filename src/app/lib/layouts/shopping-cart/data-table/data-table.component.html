@@ -1,4 +1,5 @@
 <div class="container p-5">
+    <h2 class="text-center">List of products</h2>
     <table class="table table-striped table-hover text-center">
         <thead>
             <tr>
@@ -39,7 +40,7 @@
 <hr>
 
 <div class="container mt-5">
-    <h2 class="text-center">Factura</h2>
+    <h2 class="text-center">Invoice</h2>
     <hr>
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -64,32 +65,29 @@
                 </tbody>
             </table>
         </div>
-        
-        
     </div>
 
-    <div >
-        <table >
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody >
-                <tr >
-                    <td>IVA (12%)</td>
-                    <td>{{iva}}</td>
-                </tr>
-                <tr>
-                    <td>Subtotal</td>
-                    <td >{{subtotal}}</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td >{{totalAmount}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col p-2">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-end">
+                <table class="table table-total text-center two-columns">
+                    <tbody>
+                        <tr>
+                            <td>IVA (12%)</td>
+                            <td>{{iva}}</td>
+                        </tr>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td>{{subtotal}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>{{totalAmount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+    
 </div>
