@@ -10,9 +10,19 @@ import { SignInInterfaceI } from '../../interfaces/auth.interface';
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
-export class SignInComponent implements OnInit{
+export class SignInComponent implements OnInit {
+  loginForm!: FormGroup
 
-  loginForm!: FormGroup;
+  inputs!: SignInInterfaceI;
+
+  emailForm: string = "jntnglln@gmail.com";
+  passwordForm: string = "12345";
+  response: string = "";
+
+  dataForm: SignInInterfaceI = {
+    email: '',
+    password: ''
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +34,9 @@ export class SignInComponent implements OnInit{
    */
   ngOnInit(): void {
     this.createForm();
+    this.loginForm.valueChanges.subscribe((values) => {
+      this.inputs = values;
+    });
   }
 
   /**
@@ -42,7 +55,6 @@ export class SignInComponent implements OnInit{
   login(){
     if (this.loginForm.invalid) {
       console.log('Formulario inválido');
-      
       this.loginForm.markAllAsTouched();
       return;
     }
@@ -52,7 +64,15 @@ export class SignInComponent implements OnInit{
       password: this.loginForm.get('password')?.value
     }
 
-    // llamar al servicio
+    this.dataForm = data;
+
+    if (data.email === this.emailForm && data.password === this.passwordForm) {
+      this.response = "Datos correctos";
+    } else {
+      this.response = "Datos incorrectos";
+    }
+
+    // llamar al servicio cuando se lo cree
 
     console.log('data: ', data);
   }

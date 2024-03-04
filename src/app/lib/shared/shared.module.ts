@@ -10,7 +10,7 @@ const modules = [
 ];
 
 @NgModule({
-  // imports: [...modules],
-  // exports: [...modules],
+  imports: [...modules],
+  exports: [...modules],
 })
 export class SharedModule { }

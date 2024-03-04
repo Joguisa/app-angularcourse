@@ -1,8 +1,22 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { Routes, provideRouter } from '@angular/router';
 
-import { routes } from './app.routes';
+// import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+const routes: Routes = [
+  {
+    path: '',
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./lib/auth/auth.module').then((m) => m.AuthModule),
+      },
+      { path: '**', redirectTo: 'auth', pathMatch: 'full' },
+    ],
+  },
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -6,9 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 const modules = [
-  BrowserModule,
-  BrowserAnimationsModule,
-  HttpClientModule,
 ];
 
 @NgModule({
