@@ -1,84 +1,126 @@
 <div class="w-full h-full">
-    <div class="d-flex flex-row-reverse h-full">
-      <!-- FORM -->
-      <div class="col-12 col-lg-5 p-1 p-md-4">
-        <div class="d-flex flex-column justify-content-center align-items-center p-3 p-md-4 h-full">
-          <div class="d-block d-lg-none mx-auto mb-3">
-            <img src="./assets/logo/angular_solidBlack.png" class="img-fluid" alt="ANGULAR">
-          </div>
-          <span class="text-center fs-20 fw-500 lh-16 text-formsPrimary">SIGN UP</span>
-          <form class="w-full " autocomplete="off" [formGroup]="signUpForm">
-  
-            <!-- FIRSTNAME -->
-            <div class="mt-3">
-                <label for="firstnameI" class="fw-500 my-1">First Name</label>
-                <ng-container>
-                  <input type="text" id="firstnameI" [maxlength]="20" [placeholder]="'First Name'"
-                    class="form-control bg-inputPrimary" formControlName="firstname">
-                </ng-container>
-              </div>
-
-              <!-- LASTNAME -->
-            <div class="mt-3">
-                <label for="lastnameI" class="fw-500 my-1">Last Name</label>
-                <ng-container>
-                  <input type="text" id="lastnameI" [maxlength]="20" placeholder="Last Name"
-                    class="form-control bg-inputPrimary" formControlName="lastname">
-                </ng-container>
-              </div>
-
-            <!-- EMAIL -->
-            <div class="mt-3">
-              <label for="emailI" class="fw-500 my-1">Email</label>
-              <ng-container>
-                <input type="text" id="emailI" placeholder="Email"
-                  class="form-control bg-inputPrimary" formControlName="email">
-              </ng-container>
-            </div>
-  
-            <!-- PASSWORD -->
-            <div class="mt-3">
-              <label for="passwordI" class="fw-500 my-1">Password</label>
-              <div class="input-group">
-                <input type="password" formControlName="password" placeholder="Password" id="passwordI" [maxLength]="10"
-                  class="form-control rounded bg-inputPrimary">
-              </div>
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-3">
-                <label for="passwordII" class="fw-500 my-1">Confirm Password</label>
-                <div class="input-group">
-                  <input type="password" formControlName="confirmpassword" placeholder="Confirm Password" id="passwordII" [maxLength]="10"
-                    class="form-control rounded bg-inputPrimary">
-                </div>
-              </div>
-  
-            <!-- BUTTON  -->
-            <div class="d-flex flex-row justify-content-center mb-2 mt-4 w-full">
-              <button type="submit" class="btn btn-formsPrimary m-1 w-full" (click)="signIn()">
-                Sign Up
-              </button>
-            </div>
-  
-            <!-- GO TO SIGN OUT  -->
-            <div class="text-center mb-1 d-flex justify-content-center w-full mt-3">
-                <span>Already have an account? <a class="cursor-pointer" (click)="redirectSignIn()"> Sign In</a></span>
-            </div>
-          </form>
+  <div class="d-flex flex-row-reverse h-full">
+    <!-- FORM -->
+    <div class="col-12 col-lg-5 p-1 p-md-4">
+      <div class="d-flex flex-column justify-content-center align-items-center p-3 p-md-4 h-full">
+        <div class="d-block d-lg-none mx-auto mb-3">
+          <img src="./assets/logo/angular_solidBlack.png" class="img-fluid" alt="ANGULAR">
         </div>
-      </div>
-  
-      <!-- DETAIL -->
-      <div class="col-12 col-lg-7 d-none d-lg-block bg-formsPrimary h-full">
-        <div class="d-flex flex-column justify-content-center align-items-center p-2 p-md-4 h-full">
-          <div class="mx-auto mb-3">
-            <img src="./assets/logo/angular_whiteTransparent.png" class="img-fluid" alt="ANGULAR">
+        <span class="text-center fs-20 fw-500 lh-16 text-formsPrimary">SIGN UP</span>
+        <form class="w-full " autocomplete="off" [formGroup]="signUpForm">
+
+          <!-- FIRSTNAME -->
+          <div class="mt-3">
+            <label for="firstnameI" class="fw-500 my-1">First Name</label>
+            <ng-container>
+              <input type="text" id="firstnameI" [maxlength]="20" [placeholder]="'First Name'"
+                class="form-control bg-inputPrimary" formControlName="firstname">
+            </ng-container>
           </div>
-  
-          <span class="text-whites h5">BOOTCAMP FULL STACK</span>
-        </div>
+          <div *ngIf="signUpForm.get('firstname')?.touched && signUpForm.get('firstname')?.invalid" class="text-danger">
+            <div *ngIf="signUpForm.get('firstname')?.errors?.['required']">
+              The first name is required
+            </div>
+            <div *ngIf="signUpForm.get('firstname')?.errors?.['minlength']">
+              The first name must be at least 6 characters
+            </div>
+          </div>
+
+          <!-- LASTNAME -->
+          <div class="mt-3">
+            <label for="lastnameI" class="fw-500 my-1">Last Name</label>
+            <ng-container>
+              <input type="text" id="lastnameI" [maxlength]="20" placeholder="Last Name"
+                class="form-control bg-inputPrimary" formControlName="lastname">
+            </ng-container>
+          </div>
+          <div *ngIf="signUpForm.get('lastname')?.touched && signUpForm.get('lastname')?.invalid" class="text-danger">
+            <div *ngIf="signUpForm.get('lastname')?.errors?.['required']">
+              The last name is required
+            </div>
+            <div *ngIf="signUpForm.get('firstname')?.errors?.['minlength']">
+              The last name must be at least 6 characters
+            </div>
+          </div>
+
+          <!-- EMAIL -->
+          <div class="mt-3">
+            <label for="emailI" class="fw-500 my-1">Email</label>
+            <ng-container>
+              <input type="text" id="emailI" placeholder="Email" class="form-control bg-inputPrimary"
+                formControlName="email">
+            </ng-container>
+          </div>
+          <div *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.invalid" class="text-danger">
+            <div *ngIf="signUpForm.get('email')?.errors?.['required']">
+              The email is required
+            </div>
+          </div>
+
+          <!-- PASSWORD -->
+          <div class="mt-3">
+            <label for="passwordI" class="fw-500 my-1">Password</label>
+            <div class="input-group">
+              <input type="password" formControlName="password" placeholder="Password" id="passwordI" [maxLength]="10"
+                class="form-control rounded bg-inputPrimary">
+            </div>
+          </div>
+          <div *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.invalid" class="text-danger">
+            <div *ngIf="signUpForm.get('password')?.errors?.['required']">
+              The password is required
+            </div>
+            <div *ngIf="signUpForm.get('password')?.errors?.['minlength']">
+              Password must be at least 6 characters
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="mt-3">
+            <label for="passwordII" class="fw-500 my-1">Confirm Password</label>
+            <div class="input-group">
+              <input type="password" formControlName="confirmpassword" placeholder="Confirm Password" id="passwordII"
+                [maxLength]="10" class="form-control rounded bg-inputPrimary" (input)="checkPasswords()">
+            </div>
+          </div>
+          <!-- // mensaje de confirmar contraseña -->
+          <div *ngIf="signUpForm.get('confirmpassword')?.touched && signUpForm.get('confirmpassword')?.invalid"
+            class="text-danger">
+            <div *ngIf="signUpForm.get('confirmpassword')?.errors?.['required']">
+              Confirm Password is required
+            </div>
+            <div *ngIf="signUpForm.get('confirmpassword')?.errors?.['minlength']">
+              Confirm Password must be at least 6 characters
+            </div>
+            <div *ngIf="signUpForm.get('confirmpassword')?.errors?.['passwordNotMatch']">
+              Passwords do not match
+            </div>
+          </div>
+
+          <!-- BUTTON  -->
+          <div class="d-flex flex-row justify-content-center mb-2 mt-4 w-full">
+            <button type="submit" class="btn btn-formsPrimary m-1 w-full" [disabled]="isDisabled" (click)="signUp()">
+              Sign Up
+            </button>
+          </div>
+
+          <!-- GO TO SIGN OUT  -->
+          <div class="text-center mb-1 d-flex justify-content-center w-full mt-3">
+            <span>Already have an account? <a class="cursor-pointer" (click)="redirectSignIn()"> Sign In</a></span>
+          </div>
+        </form>
       </div>
     </div>
-  
+
+    <!-- DETAIL -->
+    <div class="col-12 col-lg-7 d-none d-lg-block bg-formsPrimary h-full">
+      <div class="d-flex flex-column justify-content-center align-items-center p-2 p-md-4 h-full">
+        <div class="mx-auto mb-3">
+          <img src="./assets/logo/angular_whiteTransparent.png" class="img-fluid" alt="ANGULAR">
+        </div>
+
+        <span class="text-whites h5">BOOTCAMP FULL STACK</span>
+      </div>
+    </div>
   </div>
+
+</div>

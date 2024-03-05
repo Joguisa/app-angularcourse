@@ -7,11 +7,6 @@
         <div class="d-block d-lg-none mx-auto mb-3">
           <img src="./assets/logo/angular_solidBlack.png" class="img-fluid" alt="ANGULAR">
         </div>
-
-        <div *ngIf="response" class="d-flex align-items-center text-center">
-          <h1> {{ response }} </h1>
-        </div>
-
         <hr>
 
         <span class="text-center fs-20 fw-500 lh-16 text-formsPrimary">LOGIN</span>
@@ -21,9 +16,14 @@
           <div class="mt-3">
             <label for="emailI" class="fw-500 my-1">Email</label>
             <ng-container>
-              <input type="email" id="emailI" placeholder="Email" class="form-control bg-inputPrimary"
-                formControlName="email">
+              <input type="text" id="emailI" placeholder="Username" class="form-control bg-inputPrimary"
+                formControlName="username">
             </ng-container>
+          </div>
+          <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="text-danger">
+            <div *ngIf="loginForm.get('username')?.errors?.['required']">
+              The username is required
+            </div>
           </div>
 
           <!-- PASSWORD -->
@@ -32,6 +32,11 @@
             <div class="input-group">
               <input type="password" formControlName="password" placeholder="Password" id="passwordI" [maxLength]="10"
                 class="form-control bg-inputPrimary">
+            </div>
+          </div>
+          <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger">
+            <div *ngIf="loginForm.get('password')?.errors?.['required']">
+              The password is required
             </div>
           </div>
 
@@ -47,18 +52,6 @@
             <span>Not have and account? <a class="cursor-pointer" (click)="redirectSignUp()"> Sign Up Here</a></span>
           </div>
         </form>
-
-        <!-- Mostrar entradas -->
-        <div *ngIf="inputs" class="my-4">
-          <h3>Form:</h3>
-          <p>Email: {{ inputs.email }}</p>
-          <p>Password: {{ inputs.password }}</p>
-        </div>
-
-        <hr>
-        <h3>Submit</h3>
-        <pre class="my-1">{{dataForm | json}}</pre>
-
       </div>
     </div>
     <!-- DETAIL -->
@@ -67,7 +60,7 @@
         <div class="mx-auto mb-3">
           <img src="./assets/logo/angular_whiteTransparent.png" class="img-fluid" alt="ANGULAR">
         </div>
-        <!-- <span class="text-whites h5">BOOTCAMP FULL STACK</span> -->
+        <span class="text-whites h5">BOOTCAMP FULL STACK</span>
       </div>
     </div>
   </div>

@@ -14,6 +14,8 @@ export class DataTableComponent implements OnInit {
   listProducts: ProductsI[] = [];
   productCart: ShoppCartI[] = [];
 
+  disabledButton: boolean = false;
+
   constructor(public _shoppingcartservice: ShoppingCartService) {}
 
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class DataTableComponent implements OnInit {
   }
 
   increaseQuantity(product: ProductsI) {
+    //if (product.quantity == product.stock) this.disabledButton = true;
     product.quantity++;
   }
 
@@ -61,5 +64,15 @@ export class DataTableComponent implements OnInit {
   deleteProduct(product: ProductsI) {
     this._shoppingcartservice.deleteProduct(product.code);
     this.getProducts();
+  }
+
+  deleteProductCart(product: ShoppCartI) {
+    const index = this.productCart.findIndex(
+      (item) => item.code === product.code
+    );
+    if (index !== -1) {
+      this.productCart.splice(index, 1);
+    }
+    this.calcularTotales();
   }
 }

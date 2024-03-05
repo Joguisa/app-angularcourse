@@ -7,6 +7,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Stock</th>
                 <th>Quantity</th>
                 <th></th>
             </tr>
@@ -18,16 +19,21 @@
                 <td> {{ item.name }} </td>
                 <td> {{ item.description }} </td>
                 <td> {{ item.price | currency:'USD' }} </td>
+                <td> {{ item.stock }} </td>
                 <td>
                     <div class="cantidad-container">
                         <i class="fa-solid fa-minus icono-cantidad" (click)="decreaseQuantity(item)"></i>
                         <span class="cantidad mx-1">{{ item.quantity }}</span>
+
                         <i class="fa-solid fa-plus icono-cantidad" (click)="increaseQuantity(item)"></i>
+
+
                     </div>
                 </td>
 
-                <td >
-                    <i class="fa fa-shopping-cart text-center icon-colour cursor-pointer mx-1" (click)="addCart(item)"></i>
+                <td>
+                    <i class="fa fa-shopping-cart text-center icon-colour cursor-pointer mx-1"
+                        (click)="addCart(item)"></i>
                     <i class="fa fa-trash text-center icon-trash cursor-pointer" (click)="deleteProduct(item)"></i>
                 </td>
             </tr>
@@ -38,6 +44,7 @@
 
 <hr>
 
+@if (productCart.length > 0) {
 <div class="container mt-5">
     <h1 class="text-center">Invoice</h1>
     <hr>
@@ -50,6 +57,7 @@
                         <th>Unit Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +67,8 @@
                         <td>{{ item.unitPrice | currency:'USD' }}</td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.total | currency:'USD' }}</td>
+                        <i class="fa fa-trash text-center icon-trash cursor-pointer"
+                            (click)="deleteProductCart(item)"></i>
                     </tr>
                     }
                 </tbody>
@@ -90,3 +100,4 @@
     </div>
 
 </div>
+}

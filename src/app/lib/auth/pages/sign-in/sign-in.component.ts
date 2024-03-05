@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignInInterfaceI } from '../../interfaces/auth.interface';
+import { AuthService } from '../../services/auth.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,22 +13,18 @@ import { SignInInterfaceI } from '../../interfaces/auth.interface';
   styleUrl: './sign-in.component.css'
 })
 export class SignInComponent implements OnInit {
+
+  //@Output() userRegistered: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  
   loginForm!: FormGroup
-
   inputs!: SignInInterfaceI;
-
-  emailForm: string = "jntnglln@gmail.com";
-  passwordForm: string = "12345";
-  response: string = "";
-
-  dataForm: SignInInterfaceI = {
-    email: '',
-    password: ''
-  };
+  protected onDestroy = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   /**
@@ -40,11 +38,20 @@ export class SignInComponent implements OnInit {
   }
 
   /**
+   * OnDestroy
+   */
+  ngOnDestroy(): void {
+    this.onDestroy.next();
+    this.onDestroy.complete();
+  }
+
+
+  /**
    * Método para crear el formulario de login
    */
   createForm(){
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -53,31 +60,31 @@ export class SignInComponent implements OnInit {
    * Método para realizar el login
    */
   login(){
-    // if (this.loginForm.invalid) {
-    //   console.log('Formulario inválido');
-    //   this.loginForm.markAllAsTouched();
-    //   return;
-    // }
-
-    let data : SignInInterfaceI = {
-      email: this.loginForm.get('email')?.value,
-      password: this.loginForm.get('password')?.value
+    if (this.loginForm.invalid) {
+      console.log('Formulario inválido');
+      this.loginForm.markAllAsTouched();
+      return;
     }
 
-    this.dataForm = data;
+    let data : SignInInterfaceI = {
+      username: this.loginForm.get('username')?.value,
+      password: this.loginForm.get('password')?.value
+    }
+   
+    this.authService.login(data)
+    .pipe(takeUntil(this.onDestroy))
+    .subscribe({
+      next: (res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['layouts/shopping-cart']);
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
 
-    this.router.navigate(['layouts/shopping-cart']);
-
-    // if (data.email === this.emailForm && data.password === this.passwordForm) {
-    //   this.response = "Datos correctos";
-    //   this.router.navigate(['layouts/shopping-cart']);
-    // } else {
-    //   this.response = "Datos incorrectos";
-    // }
-
-    // llamar al servicio cuando se lo cree
-
-    console.log('data: ', data);
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUpInterfaceI } from '../../interfaces/auth.interface';
@@ -8,22 +8,22 @@ import { SignUpInterfaceI } from '../../interfaces/auth.interface';
   standalone: false,
   // imports: [],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent implements OnInit {
 
-  signUpForm!: FormGroup;
+  //@Input() isUserRegistered: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  signUpForm!: FormGroup;
+  isDisabled: boolean = true;
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   /**
    * Método para inicializar el componente
    */
   ngOnInit(): void {
     this.createForm();
+    
   }
 
   /**
@@ -31,21 +31,19 @@ export class SignUpComponent implements OnInit {
    */
   createForm() {
     this.signUpForm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstname: ['', [Validators.required, Validators.minLength(6)]],
+      lastname: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmpassword: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   /**
    * Método para realizar el login
    */
-  signIn(){
+  signUp() {
     if (this.signUpForm.invalid) {
-      console.log('Formulario inválido');
-      
       this.signUpForm.markAllAsTouched();
       return;
     }
@@ -58,10 +56,20 @@ export class SignUpComponent implements OnInit {
       confirmpassword: this.signUpForm.get('confirmpassword')?.value
     }
 
-    // llamar al servicio
-
-    console.log('data: ', data);
+    if (data.password === data.confirmpassword) {
+      this.router.navigate(['auth/sign-in']);
+    }
   }
+
+  checkPasswords() {
+    if (this.signUpForm.get('password')?.value !== this.signUpForm.get('confirmpassword')?.value) {
+        this.signUpForm.get('confirmpassword')?.setErrors({ passwordNotMatch: true });
+    } else {
+        this.signUpForm.get('confirmpassword')?.setErrors(null);
+        this.isDisabled = !this.isDisabled;
+    }
+}
+
 
   /**
    * Método para redirigir al formulario de autenticación
@@ -69,5 +77,4 @@ export class SignUpComponent implements OnInit {
   redirectSignIn() {
     this.router.navigate(['auth/sign-in']);
   }
-
 }

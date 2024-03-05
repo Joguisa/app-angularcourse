@@ -17,6 +17,7 @@ export class ShoppingCartService {
       name: 'Smartphone',
       description: 'High-end smartphone with advanced features',
       price: 799.99,
+      stock: 10,
       quantity: 1,
     },
     {
@@ -24,6 +25,7 @@ export class ShoppingCartService {
       name: 'Laptop',
       description: 'Thin and lightweight laptop with powerful performance',
       price: 1299.99,
+      stock: 15,
       quantity: 1,
     },
     {
@@ -31,6 +33,7 @@ export class ShoppingCartService {
       name: 'Headphones',
       description: 'Wireless headphones with noise-cancelling technology',
       price: 249.99,
+      stock: 5,
       quantity: 1,
     },
     {
@@ -38,6 +41,7 @@ export class ShoppingCartService {
       name: 'Smartwatch',
       description: 'Fitness tracker with heart rate monitoring and GPS',
       price: 199.99,
+      stock: 20,
       quantity: 1,
     },
     {
@@ -46,6 +50,7 @@ export class ShoppingCartService {
       description:
         'Portable speaker with 360-degree sound and waterproof design',
       price: 99.99,
+      stock: 15,
       quantity: 1,
     },
   ];
@@ -66,7 +71,7 @@ export class ShoppingCartService {
       this.listProducts.splice(index, 1);
     }
   }
-
+  
   calcularTotales(productCart: ShoppCartI[]) {
     this.subtotal = +productCart
       .reduce((acc, curr) => acc + curr.total, 0)
