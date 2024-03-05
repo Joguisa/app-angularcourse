@@ -1,10 +1,10 @@
 export interface ProductsI {
-    code:           string
-    name:           string;
-    description:    string;
-    price:          number;
-    stock:          number;
-    quantity:       number;
+    id:             number
+    title:          string;
+    price:          string;
+    category:       number;
+    description:    number;
+    image:          number;
 }
 
 

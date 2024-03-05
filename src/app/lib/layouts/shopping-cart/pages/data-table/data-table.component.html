@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <app-header></app-header>
+    <div class="container">
+        <h2 class="text-center mt-4">Sección de ropa</h2>
+        <div class="row">
+            @if (isLoading) { <app-loading class="d-flex justify-content-center align-items-center"></app-loading>}
+
+            @for (item of listProducts; track item.id) {
+            <div class="col-md-3">
+                <app-product-card [product]="item"></app-product-card>
+            </div>
+            }
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

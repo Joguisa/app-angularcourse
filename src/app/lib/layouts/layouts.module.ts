@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { LayoutsRoutingModule } from './layouts-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { DataTableComponent } from './shopping-cart/data-table/data-table.component';
-
+import { ProductsService } from './shopping-cart/services/products.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [DataTableComponent],
+  declarations: [],
   imports: [
     CommonModule,
     LayoutsRoutingModule,
     SharedModule,
+    HttpClientModule
   ],
+  providers: [ProductsService]
 })
 export class LayoutsModule { }

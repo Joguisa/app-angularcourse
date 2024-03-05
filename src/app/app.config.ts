@@ -3,6 +3,7 @@ import { Routes, provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NoAuthGuard } from './lib/auth/guards/no-auth-guard.guard';
 import { AuthGuard } from './lib/auth/guards/auth-guard.guard';
+import { ProductsService } from './lib/layouts/shopping-cart/services/products.service';
 
 const routes: Routes = [
   {
@@ -34,6 +35,6 @@ const routes: Routes = [
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ]
 };

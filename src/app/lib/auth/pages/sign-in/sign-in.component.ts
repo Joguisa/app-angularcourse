@@ -60,15 +60,19 @@ export class SignInComponent implements OnInit {
    * Método para realizar el login
    */
   login(){
-    if (this.loginForm.invalid) {
-      console.log('Formulario inválido');
-      this.loginForm.markAllAsTouched();
-      return;
-    }
+    // if (this.loginForm.invalid) {
+    //   console.log('Formulario inválido');
+    //   this.loginForm.markAllAsTouched();
+    //   return;
+    // }
 
+    // let data : SignInInterfaceI = {
+    //   username: this.loginForm.get('username')?.value,
+    //   password: this.loginForm.get('password')?.value
+    // }
     let data : SignInInterfaceI = {
-      username: this.loginForm.get('username')?.value,
-      password: this.loginForm.get('password')?.value
+      username: "mor_2314",
+      password: "83r5^_"
     }
    
     this.authService.login(data)

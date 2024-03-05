@@ -1,0 +1,16 @@
+.example-card {
+  width: 300px; 
+  
+}
+
+.example-card img {
+  max-width: 200%;
+  max-height: 300px; 
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

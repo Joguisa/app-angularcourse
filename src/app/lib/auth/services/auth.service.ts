@@ -13,7 +13,6 @@ export class AuthService {
   urlApi: string = environment.endPoint;
 
   constructor(private http: HttpClient) { }
-  
 
   login(model: SignInInterfaceI) : Observable<GeneralResponse<void>> {
     return this.http.post<GeneralResponse<void>>(`${this.urlApi}auth//login`, model);

@@ -1,0 +1,14 @@
+.header {
+    background-color: #0F1111;
+    color: #EBEFF7;
+    padding: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: 40px;
+}
+
+.user {
+    margin-top: 2px;
+}
