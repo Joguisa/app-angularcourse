@@ -1,38 +1,17 @@
-<!-- <mat-grid-list cols="1" *ngIf="!heroe; else divHeroe">
-    <mat-grid-tile>
-      <mat-spinner></mat-spinner>
-    </mat-grid-tile>
-  </mat-grid-list>
-  
-  <ng-template #divHeroe>
-    <div fxLayout="row" fxLayour.xs="column" fxLayoutGap="30px">
-      <div fxFlex="50">
-        <h1>
-          {{ heroe.superhero }} <small>- {{ heroe.alter_ego }}</small>
-        </h1>
-        <mat-divider></mat-divider>
-        <br />
-        <img [src]="heroe | imagen" />
-      </div>
-  
-      <div fxFlex="50">
-        <h1>{{ heroe.publisher }}</h1>
-        <mat-divider></mat-divider>
-        <br />
-        <mat-list>
-          <mat-list-item>{{ heroe.first_appearance }}</mat-list-item>
-          <mat-list-item>{{ heroe.characters }}</mat-list-item>
-          <mat-list-item>{{ heroe.publisher }}</mat-list-item>
-          <mat-list-item>{{ heroe.alter_ego }}</mat-list-item>
-        </mat-list>
-        <br />
-        <button mat-button color="warm" (click)="regresar()">Regresar</button>
-      </div>
+<div class="wrapper">
+  <app-header></app-header>
+  <div class="card mb-3">
+    <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="card-img-top" alt="Wild Landscape" />
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">
+        This is a wider card with supporting text below as a natural lead-in to additional
+        content. This content is a little bit longer.
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </p>
     </div>
-  </ng-template> -->
-
-  <div class="wrapper">
-    <app-header></app-header>
-    
-    <app-footer></app-footer>
+  </div>
+  <app-footer></app-footer>
 </div>

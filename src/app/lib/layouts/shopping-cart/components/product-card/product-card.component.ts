@@ -14,5 +14,4 @@ import { CommonModule } from '@angular/common';
 export class ProductCardComponent {
 
   @Input() product!: ProductsI;
-
 }

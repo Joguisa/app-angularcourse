@@ -1,16 +1,19 @@
-<mat-card class="example-card m-2">
-  <mat-card-header>
-    <mat-card-title>{{product.title}}</mat-card-title>
-    <mat-card-subtitle>{{product.price | currency:'USD' }}</mat-card-subtitle>
-    <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
-  </mat-card-header>
-  <img [src]="product.image" alt="product.title">
-  <mat-card-content>
-    <p class="description">
-      {{product.description  }}
+<div class="card m-2 h-100" style="width: 18rem;">
+  <div class="cardheader text-center my-2">
+    <h2 class="card-title">{{product.title}}</h2>
+  </div>
+  <img [src]="product.image" class="card-img-top" alt="product.title">
+  <div class="card-body">
+    <p class="card-text description">{{product.description }}
     </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>Ver Detalle</button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <ul class="list-group list-group-light list-group-small">
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Price:</strong></span> {{product.price | currency:'USD' }}</li>
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Category:</strong> </span>{{product.category}}</li>
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Rate:</strong> </span> <span>{{ product.rating.rate }}<i class="bi bi-star-fill"></i></span> </li>
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Stock:</strong> </span>{{ product.rating.count }}</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">View Details</a>
+  </div>
+</div>

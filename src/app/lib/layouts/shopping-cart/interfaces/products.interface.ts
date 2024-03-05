@@ -1,12 +1,17 @@
 export interface ProductsI {
-    id:             number
-    title:          string;
-    price:          string;
-    category:       number;
-    description:    number;
-    image:          number;
+    id:          number;
+    title:       string;
+    price:       number;
+    description: string;
+    category:    string;
+    image:       string;
+    rating:      Rating;
 }
 
+export interface Rating {
+    rate:  number;
+    count: number;
+}
 
 export interface ShoppCartI {
     code:           string
