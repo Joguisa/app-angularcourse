@@ -11,7 +11,6 @@ import { SignUpInterfaceI } from '../../interfaces/auth.interface';
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent implements OnInit {
-
   //@Input() isUserRegistered: boolean = false;
 
   signUpForm!: FormGroup;
@@ -23,7 +22,6 @@ export class SignUpComponent implements OnInit {
    */
   ngOnInit(): void {
     this.createForm();
-    
   }
 
   /**
@@ -40,7 +38,7 @@ export class SignUpComponent implements OnInit {
   }
 
   /**
-   * Método para realizar el login
+   * Método para realizar el registro
    */
   signUp() {
     if (this.signUpForm.invalid) {
@@ -48,13 +46,13 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    let data : SignUpInterfaceI = {
+    let data: SignUpInterfaceI = {
       firstname: this.signUpForm.get('firstname')?.value,
       lastname: this.signUpForm.get('lastname')?.value,
       email: this.signUpForm.get('email')?.value,
       password: this.signUpForm.get('password')?.value,
-      confirmpassword: this.signUpForm.get('confirmpassword')?.value
-    }
+      confirmpassword: this.signUpForm.get('confirmpassword')?.value,
+    };
 
     if (data.password === data.confirmpassword) {
       this.router.navigate(['auth/sign-in']);
@@ -62,14 +60,18 @@ export class SignUpComponent implements OnInit {
   }
 
   checkPasswords() {
-    if (this.signUpForm.get('password')?.value !== this.signUpForm.get('confirmpassword')?.value) {
-        this.signUpForm.get('confirmpassword')?.setErrors({ passwordNotMatch: true });
+    if (
+      this.signUpForm.get('password')?.value !==
+      this.signUpForm.get('confirmpassword')?.value
+    ) {
+      this.signUpForm
+        .get('confirmpassword')
+        ?.setErrors({ passwordNotMatch: true });
     } else {
-        this.signUpForm.get('confirmpassword')?.setErrors(null);
-        this.isDisabled = !this.isDisabled;
+      this.signUpForm.get('confirmpassword')?.setErrors(null);
+      this.isDisabled = !this.isDisabled;
     }
-}
-
+  }
 
   /**
    * Método para redirigir al formulario de autenticación

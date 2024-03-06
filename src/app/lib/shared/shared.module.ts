@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsService } from '../layouts/shopping-cart/services/products.service';
+import { ToastrModule } from 'ngx-toastr';
 
 // material 
 
@@ -21,6 +22,7 @@ import { ProductsService } from '../layouts/shopping-cart/services/products.serv
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     CommonModule,

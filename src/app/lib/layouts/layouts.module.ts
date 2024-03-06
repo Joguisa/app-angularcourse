@@ -5,6 +5,7 @@ import { LayoutsRoutingModule } from './layouts-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ProductsService } from './shopping-cart/services/products.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ShoppingCartService } from './shopping-cart/services/shopping-cart.service';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     HttpClientModule
   ],
-  providers: [ProductsService]
+  providers: [ProductsService, ShoppingCartService],
 })
 export class LayoutsModule { }

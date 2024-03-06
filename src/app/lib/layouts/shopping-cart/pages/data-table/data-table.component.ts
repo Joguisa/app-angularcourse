@@ -7,6 +7,7 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { FooterComponent } from '../../../../shared/components/footer/footer.component';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-table',
@@ -24,7 +25,9 @@ export class DataTableComponent implements OnInit {
   disabledButton: boolean = false;
   protected onDestroy = new Subject<void>();
 
-  constructor(public _shoppingcartservice: ShoppingCartService, private _productService: ProductsService) {}
+  constructor(public _shoppingcartservice: ShoppingCartService,
+    private router: Router,
+    private _productService: ProductsService) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -43,15 +46,20 @@ export class DataTableComponent implements OnInit {
     .pipe(takeUntil(this.onDestroy))
     .subscribe({
       next: (res) => {
-        this.isLoading = false;
         this.listProducts = res;
-        console.log('Products', this.listProducts);
+        this.isLoading = false;
       },
       error: (err) => {
         console.log('Error', err);
+        this.isLoading = false;
       },
-    
     })
+  }
+
+  goToProductDetails(productId: number): void {
+    console.log('Product Id', productId);
+    this.router.navigate(['product-details', productId]); 
+    console.log('URL', this.router.navigate(['product-details', productId]));
   }
   
 }

@@ -8,14 +8,14 @@ const routes: Routes = [
     path: '',
     children: [
       { path: 'list', component: DataTableComponent },
-      { path: 'list/:id', component: ProductDetailComponent },
+      { path: 'product-details/:id', component: ProductDetailComponent },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class LayoutsRoutingModule { }
+export class LayoutsRoutingModule {}

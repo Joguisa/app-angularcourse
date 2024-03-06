@@ -3,14 +3,13 @@ import { Routes, provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NoAuthGuard } from './lib/auth/guards/no-auth-guard.guard';
 import { AuthGuard } from './lib/auth/guards/auth-guard.guard';
-import { ProductsService } from './lib/layouts/shopping-cart/services/products.service';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        canActivate: [NoAuthGuard],
+        // canActivate: [NoAuthGuard],
         path: 'auth',
         loadChildren: () =>
           import('./lib/auth/auth.module').then((m) => m.AuthModule),
@@ -19,7 +18,7 @@ const routes: Routes = [
     ],
   },
   {
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     path: 'layouts',
     children: [
       {
