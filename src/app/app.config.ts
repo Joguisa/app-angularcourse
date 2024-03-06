@@ -1,8 +1,9 @@
 import { ApplicationConfig } from '@angular/core';
-import { Routes, provideRouter } from '@angular/router';
+import { Routes, provideRouter, withViewTransitions } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NoAuthGuard } from './lib/auth/guards/no-auth-guard.guard';
 import { AuthGuard } from './lib/auth/guards/auth-guard.guard';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -33,7 +34,9 @@ const routes: Routes = [
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), 
+    provideRouter(routes, withViewTransitions()), 
     provideAnimationsAsync(),
+    
+    provideHttpClient(withFetch()),
   ]
 };

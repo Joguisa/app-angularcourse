@@ -7,27 +7,35 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { FooterComponent } from '../../../../shared/components/footer/footer.component';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-table',
   standalone: true,
-  imports: [ProductCardComponent, LoadingComponent, HeaderComponent, FooterComponent],
+  imports: [
+    ProductCardComponent,
+    LoadingComponent,
+    HeaderComponent,
+    FooterComponent,
+  ],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.css',
 })
 export class DataTableComponent implements OnInit {
-  
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   listProducts: ProductsI[] = [];
   productCart: ShoppCartI[] = [];
 
   disabledButton: boolean = false;
   protected onDestroy = new Subject<void>();
 
-  constructor(public _shoppingcartservice: ShoppingCartService,
+  constructor(
+    public _shoppingcartservice: ShoppingCartService,
     private router: Router,
-    private _productService: ProductsService) {}
+    private _productService: ProductsService,
+    private _toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -42,24 +50,25 @@ export class DataTableComponent implements OnInit {
   }
 
   getProducts() {
-    this._productService.getProducts()
-    .pipe(takeUntil(this.onDestroy))
-    .subscribe({
-      next: (res) => {
-        this.listProducts = res;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.log('Error', err);
-        this.isLoading = false;
-      },
-    })
+    this.isLoading = true;
+    this._productService
+      .getProducts()
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.listProducts = res;
+            this.isLoading = false;
+          }
+        },
+        error: (err) => {
+          this._toastr.error('Error', err);
+          this.isLoading = false;
+        },
+      });
   }
 
   goToProductDetails(productId: number): void {
-    console.log('Product Id', productId);
-    this.router.navigate(['product-details', productId]); 
-    console.log('URL', this.router.navigate(['product-details', productId]));
+    this.router.navigate(['layouts/shopping-cart/product-details', productId]);
   }
-  
 }

@@ -1,17 +1,32 @@
+@if (isLoading) {
+<div class="d-flex justify-content-center align-items-center">
+  <app-loading></app-loading>
+</div>
+}
+
 <div class="wrapper">
   <app-header></app-header>
   <div class="card mb-3">
-    <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="card-img-top" alt="Wild Landscape" />
+    <img [src]="product.image" class="card-img-top" alt="product.title">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h1 class="card-title">{{product.title}}</h1>
       <p class="card-text">
-        This is a wider card with supporting text below as a natural lead-in to additional
-        content. This content is a little bit longer.
-      </p>
-      <p class="card-text">
-        <small class="text-muted">Last updated 3 mins ago</small>
+        {{product.description }}
       </p>
     </div>
+    <ul class="list-group list-group-light list-group-small">
+      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Price:</strong></span>
+        {{product.price | currency:'USD' }}</li>
+      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Category:</strong>
+        </span>{{product.category}}</li>
+      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Rate:</strong> </span> <span>{{
+          product.rating.rate }}<i class="bi bi-star-fill"></i></span> </li>
+      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Stock:</strong> </span>{{
+        product.rating.count }}</li>
+    </ul>
+  </div>
+  <div class="p-2">
+    <button type="button" class="btn btn-primary" (click)="addToCart(product)" mdbRipple>Add to cart</button>
   </div>
   <app-footer></app-footer>
 </div>

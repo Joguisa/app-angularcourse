@@ -4,6 +4,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProductsService } from '../../../layouts/shopping-cart/services/products.service';
 import { HttpClientModule } from '@angular/common/http';
 
+
+
 @Component({
   selector: 'app-header',
   standalone: true,

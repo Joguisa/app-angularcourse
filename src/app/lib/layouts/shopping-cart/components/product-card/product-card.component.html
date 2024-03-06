@@ -2,18 +2,22 @@
   <div class="cardheader text-center my-2">
     <h2 class="card-title">{{product.title}}</h2>
   </div>
-  <img [src]="product.image" class="card-img-top" alt="product.title">
+  <img [src]="product.image" class="card-img-top" alt="Image not available">
   <div class="card-body">
     <p class="card-text description">{{product.description }}
     </p>
   </div>
   <ul class="list-group list-group-light list-group-small">
-    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Price:</strong></span> {{product.price | currency:'USD' }}</li>
-    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Category:</strong> </span>{{product.category}}</li>
-    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Rate:</strong> </span> <span>{{ product.rating.rate }}<i class="bi bi-star-fill"></i></span> </li>
-    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Stock:</strong> </span>{{ product.rating.count }}</li>
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Price:</strong></span> {{product.price
+      | currency:'USD' }}</li>
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Category:</strong>
+      </span>{{product.category}}</li>
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Rate:</strong> </span> <span>{{
+        product.rating.rate }}<i class="bi bi-star-fill"></i></span> </li>
+    <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Stock:</strong> </span>{{
+      product.rating.count }}</li>
   </ul>
   <div class="card-body">
-    <button class="btn btn-primary" (click)="onViewDetailsClick()">View Details</button>
+    <button type="button" class="btn btn-primary" (click)="onViewDetailsClick()" mdbRipple>View Details</button>
   </div>
 </div>

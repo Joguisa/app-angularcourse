@@ -6,68 +6,69 @@ import { FooterComponent } from '../../../../shared/components/footer/footer.com
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, CommonModule, LoadingComponent],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
 })
 export class ProductDetailComponent implements OnInit {
-  
+  isLoading: boolean = false;
   product!: ProductsI;
   id: number = 0;
 
   protected onDestroy = new Subject<void>();
 
-  constructor(public _shoppingcartservice: ShoppingCartService, 
+  constructor(
+    public _shoppingcartservice: ShoppingCartService,
     private _productService: ProductsService,
-    private route: ActivatedRoute
-    ) {}
-
+    private route: ActivatedRoute,
+    private _toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    // this.route.paramMap.subscribe(params => {
-    //   this.id = Number(params.get('id')!);
-    //   console.log('id', this.id);
-    // });
-    // this.route.params.subscribe(params => {
-    //   this.id = +params['id']; // Obtener el ID del parámetro 'id' de la URL
-    //   console.log('Product ID:', this.id);
-    // });
+    this.id = this.route.snapshot.params['id'];
+    this.getProductById(this.id);
 
-    this.id = Number(this.route.snapshot.paramMap.get('id'))!;
-    console.log('id', this.id);
-    // this.id = this.route.snapshot.params['id'];
-    this.getProductById(this.id)
-
-    console.log('URL', this.route.snapshot.url);
-    
-    
-    
   }
 
-   /**
- * OnDestroy
- */
-   ngOnDestroy(): void {
+  /**
+   * OnDestroy
+   */
+  ngOnDestroy(): void {
     this.onDestroy.next();
     this.onDestroy.complete();
   }
 
+  /**
+   *
+   * @param id
+   */
   getProductById(id: number) {
-    this._productService.getProductById(id)
-    .pipe(takeUntil(this.onDestroy))
-    .subscribe({
-      next: (res) => {
-        this.product = res;
-        console.log('Product', this.product);
-        
-      },
-      error: (err) => {
-        console.log('Error', err);
-      },
-    })
+    this.isLoading = true;
+    this._productService
+      .getProductById(id)
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.product = res;
+            this.isLoading = false;
+          }
+        },
+        error: (err) => {
+          this._toastr.error('Error', err);
+          this.isLoading = false;
+        },
+      });
+  }
+
+  addToCart(product: ProductsI) {
+    // this._shoppingcartservice.addToCart(product);
   }
 }

@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsService } from '../layouts/shopping-cart/services/products.service';
 import { ToastrModule } from 'ngx-toastr';
 
+
+
 // material 
 
 // const modules = [

@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductsService } from './shopping-cart/services/products.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ShoppingCartService } from './shopping-cart/services/shopping-cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @NgModule({
   declarations: [],
@@ -15,6 +16,6 @@ import { ShoppingCartService } from './shopping-cart/services/shopping-cart.serv
     SharedModule,
     HttpClientModule
   ],
-  providers: [ProductsService, ShoppingCartService],
+  providers: [ProductsService, ShoppingCartService, ToastrService],
 })
 export class LayoutsModule { }
