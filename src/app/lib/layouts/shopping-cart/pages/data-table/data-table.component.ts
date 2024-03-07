@@ -1,6 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { ProductsI, ShoppCartI } from '../../interfaces/products.interface';
+import { ProductsI } from '../../interfaces/products.interface';
 import { ProductsService } from '../../services/products.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
@@ -25,7 +25,6 @@ import { Router } from '@angular/router';
 export class DataTableComponent implements OnInit {
   isLoading: boolean = false;
   listProducts: ProductsI[] = [];
-  productCart: ShoppCartI[] = [];
 
   disabledButton: boolean = false;
   protected onDestroy = new Subject<void>();
@@ -69,6 +68,6 @@ export class DataTableComponent implements OnInit {
   }
 
   goToProductDetails(productId: number): void {
-    this.router.navigate(['layouts/shopping-cart/product-details', productId]);
+    this.router.navigate(['layouts/product-details', productId]);
   }
 }

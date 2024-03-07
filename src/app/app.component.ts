@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './lib/shared/components/header/header.component';
 import { FooterComponent } from './lib/shared/components/footer/footer.component';
 
@@ -12,4 +12,14 @@ import { FooterComponent } from './lib/shared/components/footer/footer.component
 })
 export class AppComponent {
   title = 'Bootcamp';
+
+  constructor(private router: Router) {}
+
+  isLoginPage(): boolean {
+    return this.router.url === '/auth/sign-in' || this.router.url === '/auth/sign-up';
+  }
+
+  isNotLoginPage(): boolean {
+    return !this.isLoginPage();
+  }
 }

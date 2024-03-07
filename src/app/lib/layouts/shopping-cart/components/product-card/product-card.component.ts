@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { ProductsI } from '../../interfaces/products.interface';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -16,12 +17,17 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
 export class ProductCardComponent {
 
   isLoading: boolean = false;
+  constructor(private _shoppingcartservice: ShoppingCartService) {}
 
   @Input() product!: ProductsI;
   @Output() viewDetailsClick = new EventEmitter<void>();
 
   onViewDetailsClick(): void {
     this.viewDetailsClick.emit();
+  }
+
+  addToCart() {
+    this._shoppingcartservice.addProductCart(this.product);
   }
   
 }

@@ -1,21 +1,20 @@
-<div class="wrapper">
-    <app-header></app-header>
-    @if (isLoading) {
-    <div class="d-flex justify-content-center align-items-center">
-        <app-loading></app-loading>
-    </div>
-    }
+@if (isLoading) {
+<div class="d-flex justify-content-center align-items-center">
+    <app-loading></app-loading>
+</div>
+}
+
+@if (!isLoading && listProducts && listProducts.length > 0 ) {
     <div class="container">
         <div class="row">
             @for (item of listProducts; track item.id) {
             <div class="col row-cols-1 row-cols-md-2 g-4 ">
                 <div class="cols-md-3">
-                    <app-product-card [product]="item"
-                        (viewDetailsClick)="goToProductDetails(item.id)"></app-product-card>
+                    <app-product-card [product]="item" (viewDetailsClick)="goToProductDetails(item.id)"></app-product-card>
                 </div>
             </div>
             }
         </div>
     </div>
-    <app-footer></app-footer>
-</div>
+
+}

@@ -4,29 +4,46 @@
 </div>
 }
 
-<div class="wrapper">
-  <app-header></app-header>
-  <div class="card mb-3">
-    <img [src]="product.image" class="card-img-top" alt="product.title">
-    <div class="card-body">
-      <h1 class="card-title">{{product.title}}</h1>
-      <p class="card-text">
-        {{product.description }}
-      </p>
+<div class="d-flex align-items-center justify-content-center ">
+
+  @if (!isLoading) {
+  <div class="card mb-3 details">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img [src]="product.image" class="card-img-top" alt="product.title" class="img-fluid rounded-start">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h1 class="card-title"> <strong>{{product.title}}</strong> </h1>
+          <p class="card-text">
+            {{product.description }}
+          </p>
+          <p class="card-text">
+            <strong>Price:</strong>
+            {{product.price | currency:'USD' }}
+          </p>
+          <p class="card-text">
+            <strong>Category:</strong>
+            {{product.category}}
+          </p>
+          <p class="card-text">
+            <strong>Rate:</strong>
+            {{product.rating.rate }}<i class="bi bi-star-fill"></i>
+          </p>
+          <p class="card-text">
+            <strong>Stock:</strong>
+            {{product.rating.count }}
+          </p>
+          <div class="mt-4">
+            <button type="button" class="btn btn-primary" (click)="addToCart()" mdbRipple>Add to cart</button>
+            <button type="button" class="btn btn-success mx-5" (click)="goBack()" mdbRipple>Back</button>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <ul class="list-group list-group-light list-group-small">
-      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Price:</strong></span>
-        {{product.price | currency:'USD' }}</li>
-      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Category:</strong>
-        </span>{{product.category}}</li>
-      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Rate:</strong> </span> <span>{{
-          product.rating.rate }}<i class="bi bi-star-fill"></i></span> </li>
-      <li class="list-group-item px-4 d-flex justify-content-between"><span><strong>Stock:</strong> </span>{{
-        product.rating.count }}</li>
-    </ul>
   </div>
-  <div class="p-2">
-    <button type="button" class="btn btn-primary" (click)="addToCart(product)" mdbRipple>Add to cart</button>
-  </div>
-  <app-footer></app-footer>
+
+  }
+
 </div>

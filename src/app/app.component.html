@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<div class="wrapper">
+    @if (isNotLoginPage()) {
+    <app-header></app-header>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+    }
+    @if (isLoginPage()) {
+    <router-outlet></router-outlet>
+    }
+</div>

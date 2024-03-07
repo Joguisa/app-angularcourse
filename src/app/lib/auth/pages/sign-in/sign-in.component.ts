@@ -38,12 +38,6 @@ export class SignInComponent implements OnInit {
     this.loginForm.valueChanges.subscribe((values) => {
       this.inputs = values;
     });
-
-    this.showSuccess();
-  }
-
-  showSuccess() {
-    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   /**
@@ -61,7 +55,7 @@ export class SignInComponent implements OnInit {
   createForm(){
     this.loginForm = this.fb.group({
       username: ['mor_2314', Validators.required],
-      password: ['83r5^', Validators.required]
+      password: ['83r5^_', Validators.required]
     });
   }
 
@@ -79,10 +73,6 @@ export class SignInComponent implements OnInit {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value
     }
-    // let data : SignInInterfaceI = {
-    //   username: "mor_2314",
-    //   password: "83r5^_"
-    // }
    
     this.authService.login(data)
     .pipe(takeUntil(this.onDestroy))
@@ -90,7 +80,9 @@ export class SignInComponent implements OnInit {
       next: (res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
-          this.router.navigate(['layouts/shopping-cart']);
+          this.router.navigate(['layouts']);
+          console.log(this.router.url);
+          
         }
       },
       error: (err) => {

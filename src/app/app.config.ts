@@ -20,10 +20,10 @@ const routes: Routes = [
   },
   {
     // canActivate: [AuthGuard],
-    path: 'layouts',
+    path: '',
     children: [
       {
-        path: 'shopping-cart',
+        path: 'layouts',
         loadChildren: () =>
           import('./lib/layouts/layouts.module').then((m) => m.LayoutsModule),
       },

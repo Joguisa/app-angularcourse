@@ -1,0 +1,11 @@
+
+
+.details {
+    max-width: 800px;
+}
+
+p {
+    text-align: justify;
+    text-justify: distribute;
+    hyphens: auto;
+}

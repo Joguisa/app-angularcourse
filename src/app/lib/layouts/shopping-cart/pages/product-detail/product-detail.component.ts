@@ -4,7 +4,7 @@ import { ProductsService } from '../../services/products.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { FooterComponent } from '../../../../shared/components/footer/footer.component';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
@@ -28,13 +28,13 @@ export class ProductDetailComponent implements OnInit {
     public _shoppingcartservice: ShoppingCartService,
     private _productService: ProductsService,
     private route: ActivatedRoute,
+    private router: Router,
     private _toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.getProductById(this.id);
-
   }
 
   /**
@@ -57,8 +57,8 @@ export class ProductDetailComponent implements OnInit {
       .subscribe({
         next: (res) => {
           if (res) {
-            this.product = res;
             this.isLoading = false;
+            this.product = res;
           }
         },
         error: (err) => {
@@ -68,7 +68,11 @@ export class ProductDetailComponent implements OnInit {
       });
   }
 
-  addToCart(product: ProductsI) {
-    // this._shoppingcartservice.addToCart(product);
+  goBack() {
+    this.router.navigate(['layouts/list']);
+  }
+
+  addToCart() {
+    this._shoppingcartservice.addProductCart(this.product);
   }
 }

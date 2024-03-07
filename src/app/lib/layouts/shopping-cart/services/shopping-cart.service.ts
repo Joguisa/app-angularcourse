@@ -1,21 +1,69 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ProductsI } from '../interfaces/products.interface';
-import { GeneralResponse } from '../../../shared/interfaces/general-responsive.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  
-  // urlApi: string = environment.endPoint;
+  urlApi: string = environment.endPoint;
+  productCart: ProductsI[] = [];
+  quantityProduct: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  // constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // getProducts() : Observable<GeneralResponse<ProductsI[]>>{
-  //   return this.http.get<GeneralResponse<ProductsI[]>>(`${this.urlApi}products`);
-  // }
+  addProductCart(product: ProductsI): void {
+    const existingProduct = this.productCart.find(
+      (item) => item.id === product.id
+    );
 
+    if (existingProduct) {
+      existingProduct.quantity += product.quantity;
+      // existingProduct.total = existingProduct.quantity * existingProduct.price;
+    } else {
+      this.productCart.push(product);
+    }
+
+    this.quantityProduct.next(this.productCart.length);
+    this.totalPrice.next(this.getTotalPrice());
+  }
+
+  getQuantityProductInCart(): number {
+    return this.productCart.reduce((acc, item) => acc + item.quantity, 0);
+
+  }
+
+  getTotalPrice(): number {
+    return this.productCart.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+  }
+
+  removeItemProductCart(product: ProductsI): void {
+    this.productCart = this.productCart.filter(
+      (item) => item.id !== product.id
+    );
+    this.quantityProduct.next(this.productCart.length);
+    this.totalPrice.next(this.getTotalPrice());
+  }
+
+  removeProductCart(product: ProductsI): void {
+    const index = this.productCart.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (index !== -1) {
+      if (this.productCart[index].quantity > 1) {
+        this.productCart[index].quantity--;
+      } else {
+        this.productCart.splice(index, 1);
+      }
+    }
+    this.quantityProduct.next(this.productCart.length);
+    this.totalPrice.next(this.getTotalPrice());
+  }
 }

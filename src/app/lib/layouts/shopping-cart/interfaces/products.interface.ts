@@ -6,17 +6,9 @@ export interface ProductsI {
     category:    string;
     image:       string;
     rating:      Rating;
+    quantity:    number;
 }
-
 export interface Rating {
     rate:  number;
     count: number;
-}
-
-export interface ShoppCartI {
-    code:           string
-    name:           string;
-    unitPrice:      number;
-    quantity:       number;
-    total:          number;
 }
