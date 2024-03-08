@@ -21,13 +21,12 @@ export class ShoppingCartService {
     );
 
     if (existingProduct) {
-      existingProduct.quantity += product.quantity;
-      // existingProduct.total = existingProduct.quantity * existingProduct.price;
+      existingProduct.quantity++;
     } else {
-      this.productCart.push(product);
+      this.productCart.push({ ...product, quantity: 1 });
     }
 
-    this.quantityProduct.next(this.productCart.length);
+    this.quantityProduct.next(this.getQuantityProductInCart());
     this.totalPrice.next(this.getTotalPrice());
   }
 
@@ -51,9 +50,9 @@ export class ShoppingCartService {
     this.totalPrice.next(this.getTotalPrice());
   }
 
-  removeProductCart(product: ProductsI): void {
+  removeProductCart(idProduct: number): void {
     const index = this.productCart.findIndex(
-      (item) => item.id === product.id
+      (item) => item.id === idProduct
     );
 
     if (index !== -1) {

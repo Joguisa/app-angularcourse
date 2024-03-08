@@ -1,24 +1,16 @@
-<header class="header">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="assets/hh.png" alt="logo" class="img-fluid logo">
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div>
+            <a class="navbar-brand">Navbar</a>
         </div>
-        <div class="col-md-6 d-flex justify-content-end">
-            <div (click)="goToShoppingCart()" class="position-relative">
-                <i class="bi bi-cart-dash fs-4"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{productsInCart}}
-                </span>
+        <div class="d-flex">
+            <div (click)="goToShoppingCart()">
+                <span class="badge badge-pill bg-danger">{{productsInCart}}</span>
+                <span><i class="fas fa-shopping-cart fs-4"></i></span>
             </div>
-            @if (!getUserIsLogin()) {
-                <div class="user">
-                    <i class="bi bi-person-circle fs-4 ms-4 me-2" (click)="goToLogin()"></i>
-                </div>
-            } @else {
-                <div >
-                    <button class="btn btn-danger ms-4" (click)="close()"> Cerrar Sesión</button>
-                </div>
-            }
+            <div class="user mx-2">
+                <i class="fas fa-user cursor-pointer fs-4" (click)="close()"></i>
+            </div>
         </div>
     </div>
-</header>
+</nav>

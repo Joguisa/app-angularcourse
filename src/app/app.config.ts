@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        // canActivate: [NoAuthGuard],
+        canActivate: [NoAuthGuard],
         path: 'auth',
         loadChildren: () =>
           import('./lib/auth/auth.module').then((m) => m.AuthModule),
@@ -19,7 +19,7 @@ const routes: Routes = [
     ],
   },
   {
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     path: '',
     children: [
       {

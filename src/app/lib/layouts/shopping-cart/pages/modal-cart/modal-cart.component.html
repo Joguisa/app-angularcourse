@@ -1,1 +1,63 @@
-<p>modal-cart works!</p>
+<div class="container">
+
+    <div class="ps-5 pt-2 mt-3">
+        <i class="bi bi-arrow-left fs-5 return-hover rounded border p-2" (click)="return()"></i>
+    </div>
+    <h2 class="text-center">Carrito de compras</h2>
+
+    <div class="d-flex mt-4">
+        <div class="table-info">
+            <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of cartProducts; track item.id) {
+                    <tr>
+
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{{item.image}}" alt="" style="width: 45px; height: 45px"
+                                    class="rounded-circle" />
+                            </div>
+                        </td>
+                        <td>{{ item.title }}
+                        </td>
+                        <td>
+                            {{item.price | currency }}
+                        </td>
+                        <td>
+                            <app-quantity-counter [quantity]="item.quantity"
+                                (emitAddRemove)="setQuantityOutput($event, item)"></app-quantity-counter>
+                        </td>
+                        <td>
+                            <i class="bi bi-trash-fill" (click)="removeProduct(item)" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            @if (cartProducts.length == 0) {
+    <div class="text-center fs-5 fw-bolder mt-5"><i class="bi bi-cart-x fs-3 me-2"></i> No hay productos en el carrito
+    </div>
+    }
+        </div>
+    
+
+    <div class="total card ms-3 p-3">
+        <span class="fs-4 fw-bolder">Resumen del Pedido</span>
+        <div class="d-flex justify-content-between mt-1">
+            <span class="fw-bolder d-flex align-items-end">Subtotal</span>
+            <span class="fs-3 fw-medium">{{totalProducts | currency }}</span>
+        </div>
+        <button class="border color-primary fs-4 text-white mt-3 py-2 payment fw-bolder">Pagar ahora
+            ({{totalItemsProducts}})</button>
+    </div>
+</div>

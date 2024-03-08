@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductsService } from '../../../layouts/shopping-cart/services/products.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ShoppingCartService } from '../../../layouts/shopping-cart/services/shopping-cart.service';
 
 
 
@@ -19,18 +20,18 @@ export class HeaderComponent implements OnInit, OnDestroy{
   protected onDestroy = new Subject<void>();
 
   constructor(private router: Router,
-    private productService: ProductsService) { }
+    private _shoppingcartservice: ShoppingCartService,) { }
 
   /**
    * OnInit
    */
   ngOnInit() {
-    // this.productService
-    //   .quantityProductsInCart
-    //   .pipe(takeUntil(this.onDestroy))
-    //   .subscribe(quantity => {
-    //     this.productsInCart = quantity;
-    //   })
+    this._shoppingcartservice
+      .quantityProduct
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(quantity => {
+        this.productsInCart = quantity;
+      })
   }
 
   /**

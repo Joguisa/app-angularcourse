@@ -1,0 +1,31 @@
+.container {
+    padding: 20px;
+    border-radius: 5px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.total{
+    width: 30%;
+    height: fit-content;
+}
+
+.table-info{
+    width: 70%;
+}
+
+th,td{
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.payment:hover{
+    background-color: #222727;
+}
