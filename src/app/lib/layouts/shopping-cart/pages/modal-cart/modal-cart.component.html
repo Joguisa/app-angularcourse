@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="ps-5 pt-2 mt-3">
-        <i class="bi bi-arrow-left fs-5 return-hover rounded border p-2" (click)="return()"></i>
+        <i class="bi bi-arrow-left fs-5 return-hover rounded border p-2 cursor-pointer" (click)="return()"></i>
     </div>
     <h2 class="text-center">Carrito de compras</h2>
 
@@ -23,7 +23,7 @@
 
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="{{item.image}}" alt="" style="width: 45px; height: 45px"
+                                <img src="{{ item.image }}" alt="" style="width: 45px; height: 45px"
                                     class="rounded-circle" />
                             </div>
                         </td>
@@ -45,19 +45,20 @@
                 </tbody>
             </table>
             @if (cartProducts.length == 0) {
-    <div class="text-center fs-5 fw-bolder mt-5"><i class="bi bi-cart-x fs-3 me-2"></i> No hay productos en el carrito
-    </div>
-    }
+            <div class="text-center fs-5 fw-bolder mt-5"><i class="bi bi-cart-x fs-3 me-2"></i> No hay productos en el
+                carrito
+            </div>
+            }
         </div>
-    
 
-    <div class="total card ms-3 p-3">
-        <span class="fs-4 fw-bolder">Resumen del Pedido</span>
-        <div class="d-flex justify-content-between mt-1">
-            <span class="fw-bolder d-flex align-items-end">Subtotal</span>
-            <span class="fs-3 fw-medium">{{totalProducts | currency }}</span>
+
+        <div class="total card ms-3 p-3">
+            <span class="fs-4 fw-bolder">Resumen del Pedido</span>
+            <div class="d-flex justify-content-between mt-1">
+                <span class="fw-bolder d-flex align-items-end">Subtotal</span>
+                <span class="fs-3 fw-medium">{{totalProducts | currency }}</span>
+            </div>
+            <button class="border color-primary fs-4 text-white mt-3 py-2 payment fw-bolder">Pagar ahora
+                ({{totalItemsProducts}})</button>
         </div>
-        <button class="border color-primary fs-4 text-white mt-3 py-2 payment fw-bolder">Pagar ahora
-            ({{totalItemsProducts}})</button>
     </div>
-</div>

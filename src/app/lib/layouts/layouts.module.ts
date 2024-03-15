@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductsService } from './shopping-cart/services/products.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ShoppingCartService } from './shopping-cart/services/shopping-cart.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @NgModule({
   declarations: [],
@@ -14,7 +14,8 @@ import { ToastrService } from 'ngx-toastr';
     CommonModule,
     LayoutsRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   providers: [ProductsService, ShoppingCartService, ToastrService],
 })

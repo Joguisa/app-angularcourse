@@ -6,10 +6,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from './services/auth.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { ɵBrowserAnimationBuilder } from '@angular/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({

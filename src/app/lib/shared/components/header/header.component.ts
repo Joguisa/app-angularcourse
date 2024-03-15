@@ -1,68 +1,52 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductsService } from '../../../layouts/shopping-cart/services/products.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ShoppingCartService } from '../../../layouts/shopping-cart/services/shopping-cart.service';
+import { AuthService } from '../../../auth/services/auth.service';
+import { CommonModule } from '@angular/common';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   providers: [ProductsService]
 })
 export class HeaderComponent implements OnInit, OnDestroy{
+
   productsInCart: number = 0;
   protected onDestroy = new Subject<void>();
 
-  constructor(private router: Router,
-    private _shoppingcartservice: ShoppingCartService,) { }
+  constructor(
+    private router: Router,
+    public _authService: AuthService,
+    public _shoppingCartService: ShoppingCartService
+  ) { }
 
-  /**
-   * OnInit
-   */
-  ngOnInit() {
-    this._shoppingcartservice
-      .quantityProduct
+  ngOnInit(): void {
+    this._shoppingCartService.quantityProduct
       .pipe(takeUntil(this.onDestroy))
       .subscribe(quantity => {
         this.productsInCart = quantity;
-      })
+      });
   }
 
-  /**
- * OnDestroy
- */
   ngOnDestroy(): void {
     this.onDestroy.next();
     this.onDestroy.complete();
   }
 
   /**
-   * Redirije al Login
-   */
-  goToLogin() {
-    this.router.navigateByUrl('/auth/sign-in');
-  }
-
-  /**
- * Saber si el usuario esta logueado
- * @returns 
- */
-  getUserIsLogin() {
-    return localStorage.getItem('token');
-  }
-
-  /**
    * Cerrar Sesion
    */
   close() {
-    localStorage.removeItem('token');
-    this.router.navigateByUrl('/auth/sign-in');
+    this._authService.logout();
   }
 
   /**

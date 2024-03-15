@@ -7,16 +7,6 @@ import { ProductsService } from '../layouts/shopping-cart/services/products.serv
 import { ToastrModule } from 'ngx-toastr';
 
 
-
-// material 
-
-// const modules = [
-//   CommonModule,
-//   ReactiveFormsModule,
-//   FormsModule,
-//   HttpClientModule,
-// ];
-
 @NgModule({
   declarations: [],
   imports: [

@@ -63,6 +63,8 @@ export class ModalCartComponent {
       .pipe(takeUntil(this.onDestroy))
       .subscribe((totalItems) => {
         this.totalItemsProducts = totalItems;
+        console.log('totalItemsProducts', this.totalItemsProducts,totalItems );
+        
       });
   }
 

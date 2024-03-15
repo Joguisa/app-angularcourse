@@ -61,7 +61,7 @@ export class DataTableComponent implements OnInit {
           }
         },
         error: (err) => {
-          this._toastr.error('Error', err);
+          this._toastr.error(err.message);
           this.isLoading = false;
         },
       });

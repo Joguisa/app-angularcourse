@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProductsI } from '../interfaces/products.interface';
+import { environment } from '../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,6 @@ export class ProductsService {
   }
 
   getProductById(id: number) : Observable<ProductsI>{
-    console.log('idservice', id);
-    
     return this.http.get<ProductsI>(`${this.urlApi}products/${id}`);
   }
   

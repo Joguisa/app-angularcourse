@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ProductsI } from '../interfaces/products.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,11 @@ import { ProductsI } from '../interfaces/products.interface';
 export class ShoppingCartService {
   urlApi: string = environment.endPoint;
   productCart: ProductsI[] = [];
-  quantityProduct: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private http: HttpClient) {}
+  totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  quantityProduct: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  constructor(private http: HttpClient, private _toastr: ToastrService) {}
 
   addProductCart(product: ProductsI): void {
     const existingProduct = this.productCart.find(
@@ -21,18 +23,21 @@ export class ShoppingCartService {
     );
 
     if (existingProduct) {
-      existingProduct.quantity++;
+      existingProduct.quantity++;      
     } else {
       this.productCart.push({ ...product, quantity: 1 });
+      
     }
 
     this.quantityProduct.next(this.getQuantityProductInCart());
+    console.log('quantityProduct', this.quantityProduct);
+
     this.totalPrice.next(this.getTotalPrice());
+    this._toastr.success('Product added to cart', 'Success');
   }
 
   getQuantityProductInCart(): number {
     return this.productCart.reduce((acc, item) => acc + item.quantity, 0);
-
   }
 
   getTotalPrice(): number {
