@@ -1,26 +1,30 @@
 # AppBootcamp
 
+El siguiente proyecto es un carrito de compras el cual consume la api de [Fake Store](https://fakestoreapi.com/docs) para traer los productos y hacer la autenticación.
+<br/>
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 
-## Development server
+## Clonar
+Luego de clonar el proyecto hacer un `npm i` para instalar todas las dependencias.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Comentarios sobre el desarrollo del proyecto
+1. **Formularios Reactivos**
+    - Se utilizaron formularios reactivos para gestionar y validar los datos de entrada del usuario de manera eficiente, facilitando la creación de interfaces interactivas y dinámicas.
+2. **Observables, Subjects y BehaviorSubjects:**
+   - Se emplearon Observables y BehaviorSubjects para implementar un flujo de datos reactivo en la aplicación, permitiendo una comunicación eficiente entre componentes y servicios.
 
-## Code scaffolding
+3. **Guardianes (Guards):**
+   - Se utilizaron guardianes para proteger las rutas de la aplicación y controlar el acceso a determinadas áreas según la autenticación del usuario.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+4. **Autenticación por Token:**
+   - La autenticación se gestionó mediante tokens, proporcionando un método seguro para validar la identidad del usuario y proteger las rutas y recursos de la aplicación.
 
-## Build
+5. **Servicios:**
+   - Se crearon servicios para encapsular la lógica de negocio y la interacción con APIs externas, promoviendo un diseño modular y reutilizable.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+6. **Componentes Compartidos de MDBootstrap:**
+   - Se integraron componentes compartidos de la biblioteca [MDBootstrap](https://mdbootstrap.com/docs/standard/getting-started/installation/) para agilizar el desarrollo de la interfaz de usuario y mantener un aspecto visual moderno y coherente en toda la aplicación.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 
