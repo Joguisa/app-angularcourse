@@ -1,10 +1,16 @@
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { inject } from '@angular/core';
 
 export const NoAuthGuard: CanActivateFn = (route, state) => {
-  const token = localStorage.getItem('token');
 
-  if (!token) {
+  const router = inject(Router);
+  const authService = inject(AuthService);
+
+  if (authService.isAuthenticated()) {
+    router.navigateByUrl('/layouts');
+    return false;
+  } else {
     return true;
   }
-  return false;
 };

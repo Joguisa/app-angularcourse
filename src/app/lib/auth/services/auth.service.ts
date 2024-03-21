@@ -11,7 +11,9 @@ import { environment } from '../../../../environments/environment.development';
   providedIn: 'root',
 })
 export class AuthService {
+
   urlApi: string = environment.endPoint;
+  private tokenKey = 'token';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -22,8 +24,33 @@ export class AuthService {
     );
   }
 
+  clearTokenIfExist(): void {
+    const token = this.getToken();
+    if (token) {
+      console.log('clearTokenIfExist');
+      
+      this.clearToken();
+    }
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+  }
+
+  clearToken(): void {
+    localStorage.removeItem(this.tokenKey);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+  
   logout() {
-    localStorage.removeItem('token');
+    this.clearToken();
     this.router.navigateByUrl('/auth/sign-in');
   }
 }
